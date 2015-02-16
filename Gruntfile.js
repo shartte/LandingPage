@@ -61,8 +61,9 @@ module.exports = function (grunt) {
             pages: {
                 options: {
                     flatten: true,
-                    data: 'data/*.{json}',
-                    partials: ['src/partials/*.hbs']
+                    data: 'data/launcherReleases.json',
+                    partials: ['src/partials/*.hbs'],
+                    helpers: ['./json-helper.js']
                 },
                 files: {
                     'dist/': ['src/index.hbs']
@@ -79,6 +80,17 @@ module.exports = function (grunt) {
                         cwd: 'bower_components/webfont-notosans/',
                         src: ["**/*.{eot,ttf,woff}"],
                         dest: 'dist/assets/'
+                    }
+                ]
+            },
+            fontawesome: {
+                files: [
+                    {
+                        flatten: true,
+                        expand: true,
+                        cwd: 'bower_components/fontawesome/fonts',
+                        src: ["**/*.{eot,ttf,woff}"],
+                        dest: 'dist/fonts/'
                     }
                 ]
             },
@@ -107,12 +119,14 @@ module.exports = function (grunt) {
 
         less: {
             dist: {
+                compress: true,
                 // The hope is that less uses the optimized images for data-uri
                 paths: ["dist/assets/", "src/assets/"],
                 files: {
                     "dist/assets/style.css": ["src/assets/*.less"],
                     "dist/assets/vendor.css": [
                         "bower_components/normalize.css/normalize.css",
+                        "bower_components/fontawesome/css/font-awesome.css",
                         "bower_components/webfont-notosans/**/*.css"
                     ]
                 }
@@ -135,7 +149,7 @@ module.exports = function (grunt) {
             build: {
                 files: {
                     'dist/assets/scripts.js': ['src/assets/*.js'],
-                    'dist/assets/vendor.js': ['bower_components/jquery/dist/jquery.js']
+                    'dist/assets/vendor.js': ['bower_components/jquery/dist/jquery.js', 'bower_components/ua-parser-js/src/ua-parser.js']
                 }
             }
         },
@@ -148,6 +162,8 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('assemble');
+
+    grunt.registerTask("launcher-releases", require('./launcher-releases.js'));
 
     grunt.registerTask('server', [
         'build',
@@ -163,6 +179,7 @@ module.exports = function (grunt) {
         'clean:embedded',
         'autoprefixer',
         'uglify',
+        'launcher-releases',
         'assemble'
     ]);
 

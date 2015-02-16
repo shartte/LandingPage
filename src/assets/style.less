@@ -51,6 +51,44 @@ body {
   vertical-align: middle;
 }
 
+.clearfix {
+  *zoom: 1;
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+  }
+}
+
+div.recommended {
+  display: none; // Shown by JS
+  border-radius: 5px;
+  border: 1px solid white;
+  width: 300px;
+  margin: 0 auto;
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
+p, h3 {
+  color: white;
+  text-shadow: -1px 1px 1px black;
+}
+
+#releases {
+  div.windows, div.linux {
+    text-align: center;
+    a {
+      display: inline-block;
+      margin-bottom: 0;
+    }
+  }
+
+  strong {
+    font-weight: normal;
+  }
+}
+
 /**
  * Mini player styles
  */
@@ -87,7 +125,7 @@ body {
  * Menu buttons and thumbnails
  */
 nav > div { display: none; } /** initial menu state **/
-nav > div > a {
+nav > div > a, a.btn {
   display: block;
   margin: 15px auto;
   width: 256px;
@@ -99,7 +137,7 @@ nav > div > a {
   color: white;
   text-shadow: -1px 1px 1px black;
 }
-nav > div > a:hover { background-image: data-uri('embedded/button_hover.jpg'); }
+nav > div > a:hover, a.btn:hover { background-image: data-uri('embedded/button_hover.jpg'); }
 nav a.back { margin-top: 60px; }
 nav .thumbs a { display: inline-block; }
 

@@ -3,7 +3,7 @@ $(function() {
     // menu initialization
     var $menu = $('#menu');
     var $menuEntries = $menu.children('div');
-    var $playIframe = $('#play iframe');
+    var $playIframe = $('#play').find('iframe');
     $(window).on('hashchange', function() {
         $menuEntries.hide();
         var clickedMenuEntry =
@@ -23,7 +23,66 @@ $(function() {
 
 });
 
-$(window).load(function() {
+$(function() {
+
+    function selectRecommendedRelease() {
+
+        var parser = new UAParser();
+        var os = parser.getOS().name;
+        var arch = parser.getCPU().architecture;
+        var is64Bit = (arch === "amd64" || arch == "ia64");
+
+        var platformIcon;
+        var releaseName;
+        var platformName;
+        switch (os.toLowerCase()) {
+            case "windows":
+                releaseName = is64Bit ? "win64" : "win32";
+                platformIcon = "fa-windows";
+                platformName = is64Bit ? "Windows 64-bit" : "Windows 32-bit";
+                break;
+            case "linux":
+            case "centos":
+            case "fedora":
+            case "debian":
+            case "gnu":
+            case "mandriva":
+            case "redhat":
+            case "suse":
+            case "ubuntu":
+            case "vectorlinux":
+                releaseName = is64Bit ? "linux64" : "linux32";
+                platformIcon = "fa-linux";
+                platformName = is64Bit ? "Linux 64-bit" : "Linux 32-bit";
+                break;
+            case "mac os":
+                releaseName = "macosx";
+                platformIcon = "fa-apple";
+                platformName = "Mac OS X";
+                break;
+            default:
+                break;
+        }
+
+        // Try fallback to jar once.
+        if (!releaseName || !latestLauncherRelease[releaseName]) {
+            releaseName = "jar";
+            platformIcon = "fa-file-zip-o";
+            platformName = "Jar for Java 8";
+        }
+
+        var release = latestLauncherRelease[releaseName];
+        if (release) {
+            var recommended = $(".recommended").show();
+            recommended.find("p i.fa").addClass(platformIcon);
+            recommended.find(".platform").text(platformName);
+            recommended.find(".size").text(release.size);
+            recommended.find("a").attr("href", release.url);
+        }
+    }
+
+    selectRecommendedRelease();
+
     var curBackground = 1;
     var backgroundsCount = 10;
     var backgroundsExt = '.jpg';

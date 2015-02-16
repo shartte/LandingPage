@@ -1,0 +1,36 @@
+<div id="releases">
+
+  <h3>Terasology Launcher {{launcherReleases.version}}</h3>
+  <p>Released {{formatDate launcherReleases.released "%m/%d/%Y"}}</p>
+
+  <div class="clearfix windows">
+    {{#with launcherReleases.win64}}
+      <a href="{{url}}" class="btn" download><i class="fa fa-windows"></i> <strong>Windows</strong> <small>64-bit ({{size}})</small></a>
+    {{/with}}
+
+    {{#with launcherReleases.win32}}
+      <a href="{{url}}" class="btn" download><i class="fa fa-windows"></i> <strong>Windows</strong> <small>32-bit ({{size}})</small></a>
+    {{/with}}
+  </div>
+
+  <div class="clearfix linux">
+    {{#with launcherReleases.linux64}}
+      <a href="{{url}}" class="btn" download><i class="fa fa-linux"></i> <strong>Linux</strong> <small>64-bit ({{size}})</small></a>
+    {{/with}}
+
+    {{#with launcherReleases.linux32}}
+      <a href="{{url}}" class="btn" download><i class="fa fa-linux"></i> <strong>Linux</strong> <small>32-bit ({{size}})</small></a>
+    {{/with}}
+  </div>
+
+  {{#with launcherReleases.macosx}}
+    <a href="{{url}}" download><i class="fa fa-apple"></i> <strong>Mac OS X</strong> <small>({{size}})</small></a>
+  {{/with}}
+
+  {{#with launcherReleases.jar}}
+    <a href="{{url}}" download><i class="fa fa-file-zip-o"></i> <strong>Jar</strong> <small>for Java 8 ({{size}})</small></a>
+  {{/with}}
+
+  <a href="#" class="back">Back</a>
+
+</div>

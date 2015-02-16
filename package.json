@@ -17,7 +17,10 @@
     "grunt-contrib-less": "^1.0.0",
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1",
+    "humanize": "0.0.9",
     "load-grunt-tasks": "^0.6.0",
+    "octonode": "^0.6.14",
+    "request": "^2.53.0",
     "time-grunt": "^1.0.0"
   }
 }
