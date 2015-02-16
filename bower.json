@@ -16,9 +16,7 @@
     "normalize.css": "~3.0.2",
     "webfont-notosans": "~0.1.0",
     "fontawesome": "~4.3.0",
-    "ua-parser-js": "~0.7.3"
-  },
-  "devDependencies": {
-    "fontawesome": "~4.3.0"
+    "ua-parser-js": "~0.7.3",
+    "jquery": "1.11.2"
   }
 }
