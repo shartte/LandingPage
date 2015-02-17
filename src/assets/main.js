@@ -5,11 +5,14 @@ $(function() {
     var $menuEntries = $menu.children('div');
     var $playIframe = $('#play').find('iframe');
     $(window).on('hashchange', function() {
+        var hash = window.location.hash;
+        if (!hash || hash === '#') {
+            hash = "#index";
+        }
+
         $menuEntries.hide();
         var clickedMenuEntry =
-            $menuEntries.filter(window.location.hash).size() ?
-            window.location.hash :
-            '#index';
+            $menuEntries.filter(hash).size() ? hash : '#index';
 
         // actually active "play" iframe
         // because for now applet is self-signed, Java plugin displays security window
